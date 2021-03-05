@@ -24,72 +24,40 @@
     />
     <title>Frontend Mentor | IP Address Tracker</title>
   </head>
+
   <body>
-    <div class="map-container" id="map-container"></div>
-
-    <h2 class="app-title">IP Address Tracker</h2>
-
-    <div class="input-container-parent">
-      <div class="input-container">
+    <header>
+      <div class="container">
+        <h1>IP Address Tracker</h1>
         <form>
-          <span
-            ><input
-              type="text"
-              class="ip-input"
-              id="ip-input"
-              placeholder="Search IP address or domain"
-              onclick="this.select();"
-              autocomplete="on" /><button
-              type="submit"
-              class="submit"
-              id="submit"
-              title="Search"
-            >
-              <img src="/images/icon-arrow.svg" /></button
-          ></span>
+          <input type="text" placeholder="Search for an IP address or domain" />
+          <button type="submit">
+            <img src="/images/icon-arrow.svg" />
+          </button>
         </form>
-      </div>
-    </div>
-
-    <div class="results-container-parent">
-      <div class="results-container">
-        <a class="hide-show" id="hide-show" href="#" title="Hide details"
-          >Hide</a
-        >
-        <div class="ip-box result-box" id="ip-box">
-          <h5>IP ADDRESS</h5>
-          <div class="ip-address">
-            <h2 id="ip-address"></h2>
+        <div class="ip_info">
+          <div>
+            <h6>IP ADDRESS</h6>
+            <h2 class="ip_address">192.212.174.101</h2>
           </div>
-        </div>
-        <div class="vertical-bar"></div>
-
-        <div class="location-box result-box" id="location-box">
-          <h5>LOCATION</h5>
-          <div class="location">
-            <h2 id="location"></h2>
+          <div>
+            <h6>LOCATION</h6>
+            <h2 class="location">Brooklyn, NY 10001</h2>
           </div>
-        </div>
-        <div class="vertical-bar"></div>
-
-        <div class="timezone-box result-box" id="timezone-box">
-          <h5>TIMEZONE</h5>
-          <div class="timezone">
-            <!-- add offset value dynamically using the API -->
-            <h2 id="timezone"></h2>
-            <h2 id="offset"></h2>
+          <div>
+            <h6>TIMEZONE</h6>
+            <h2 class="timezone">Eastern Daylight Time</h2>
           </div>
-        </div>
-        <div class="vertical-bar"></div>
-
-        <div class="isp-box result-box" id="isp-box">
-          <h5>ISP</h5>
-          <div class="isp">
-            <h2 id="isp"></h2>
+          <div>
+            <h6>ISP</h6>
+            <h2 class="isp">SpaceX Starlink</h2>
           </div>
         </div>
       </div>
-    </div>
+    </header>
+
+    <div id="map"></div>
+
     <script
       src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
