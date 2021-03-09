@@ -3,56 +3,59 @@ const form = document.querySelector("form"),
   IP_ADDRESS = document.querySelector(".ip_address"),
   LOCATION = document.querySelector(".location"),
   TIMEZONE = document.querySelector(".timezone"),
-  ISP = document.querySelector(".isp"),
-  loader = document.querySelector(".loader");
+  ISP = document.querySelector(".isp");
 let lat;
 let long;
 let map;
+
 
 // IP Geolocation API
 const apiUrl =
   "https://geo.ipify.org/api/v1?apiKey=at_ajEeLRJSALHYCFFsXTln5bE7iQ86X";
 
-fetch("https://api.ipify.org?format=json")
+fetch('https://api.ipify.org?format=json')
   .then(res => res.json())
   .then(data => fetchGeolocation(data.ip));
 
 form.addEventListener("submit", e => {
   e.preventDefault();
   const val = inpt.value.trim();
-
   fetchGeolocation(val);
 });
 
 const fetchGeolocation = async ip => {
-  const res = await fetch(`${apiUrl}&ipAddress=${ip}`);
-  const data = await res.json();
+  try {
+    const res = await fetch(`${apiUrl}&domain=${ip}`);
+    const data = await res.json();
 
-  lat = data.location.lat;
-  long = data.location.lng;
+    lat = data.location.lat;
+    long = data.location.lng;
 
-  const locationInfo = `${data.location.city}, ${data.location.country} ${data.location.postalCode}`;
+    const locationInfo = `${data.location.city}, ${data.location.country} ${data.location.postalCode}`;
 
-  IP_ADDRESS.textContent = data.ip;
-  ISP.textContent = data.isp;
-  LOCATION.textContent = locationInfo;
-  TIMEZONE.textContent = data.location.timezone;
+    IP_ADDRESS.textContent = data.ip;
+    ISP.textContent = data.isp;
+    LOCATION.textContent = locationInfo;
+    TIMEZONE.textContent = data.location.timezone;
 
-  setMap(lat, long, locationInfo);
-  inpt.value = "";
+    setMap(lat, long, locationInfo);
+    inpt.value = "";
+  } catch (e) {
+    alert("Invalid IP Address");
+  }
 };
 
-const setMap = async (lat, long, locationInfo) => {
+const setMap = (lat, long, locationInfo) => {
   if (map) {
     map.remove();
-    map = await L.map("map", {
+    map = L.map("map", {
       center: [lat, long],
       zoom: 13,
       preferCanvas: true,
       zoomControl: false,
     });
   } else {
-    map = await L.map("map", {
+    map = L.map("map", {
       center: [lat, long],
       zoom: 13,
       preferCanvas: true,
